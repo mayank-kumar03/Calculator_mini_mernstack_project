@@ -1,0 +1,105 @@
+<html>
+  <link rel="stylesheet" href="style.css"/>
+<script>
+        //debouncing and throtening---{
+          // Debouncing is a programming technique used to control the rate at which a function is executed, particularly in response to events that can occur in rapid succession.Here are the key points about debouncing}
+  function debouncedpopulatesum() {
+    //delay the call for populatediv untill it not called
+    clearTimeout(timeout);
+    const timeout = setTimeout(function () {
+      populatesum()
+    }, 100);
+    
+  }
+  function populatesum() {
+    const a = document.getElementById("first").value;
+    const b = document.getElementById("second").value;
+    const element = document.getElementById('finalsum');
+    //element.innerHTML=parseInt(a)+parseInt(b);  // parseINT convert string to intezer in js
+    fetch("http://localhost:5000/sum?a=" + a + "&b=" + b)
+      .then(function (response) {
+        console.log(response);
+        response.text()
+          .then(function (ans) {
+            document.getElementById('finalsum').innerHTML = ans;
+          })
+      })
+
+  }
+  async function populatesub() {
+    const a = document.getElementById("first").value;
+    const b = document.getElementById("second").value;
+    const element = document.getElementById('finalsum');
+    //element.innerHTML=parseInt(a)+parseInt(b);  // parseINT convert string to intezer in js
+    const response = await fetch("http://localhost:5000/sub?a=" + a + "&b=" + b);
+    const ans = await response.text();
+    document.getElementById('finalsum').innerHTML = ans;
+
+
+  }
+  //     another method of fetching data from backend server is axios library
+  function populatemul() {
+    const a = document.getElementById("first").value;
+    const b = document.getElementById("second").value;
+    const element = document.getElementById('finalsum');
+    //element.innerHTML=parseInt(a)+parseInt(b);  // parseINT convert string to intezer in js
+    fetch("http://localhost:5000/mul?a=" + a + "&b=" + b)
+      .then(function (response) {
+        console.log(response);
+        response.text()
+          .then(function (ans) {
+            document.getElementById('finalsum').innerHTML = ans;
+          })
+      })
+
+  }
+  function populatedivide() {
+    const a = document.getElementById("first").value;
+    const b = document.getElementById("second").value;
+    const element = document.getElementById('finalsum');
+    //element.innerHTML=parseInt(a)+parseInt(b);  // parseINT convert string to intezer in js
+    fetch("http://localhost:5000/divide?a=" + a + "&b=" + b)
+      .then(function (response) {
+        console.log(response);
+        response.text()
+          .then(function (ans) {
+            document.getElementById('finalsum').innerHTML = ans;
+          })
+      })
+
+  }
+  function populatemodulo() {
+    const a = document.getElementById("first").value;
+    const b = document.getElementById("second").value;
+    const element = document.getElementById('finalsum');
+    //element.innerHTML=parseInt(a)+parseInt(b);  // parseINT convert string to intezer in js
+    fetch("http://localhost:5000/modulo?a=" + a + "&b=" + b)
+      .then(function (response) {
+        console.log(response);
+        response.text()
+          .then(function (ans) {
+            document.getElementById('finalsum').innerHTML = ans;
+          })
+      })
+
+  }
+</script>
+
+<body>
+  <div class="container">
+
+    <h1>Calculator</h1>
+    <input id="first" type="text" placeholder="enter your first num:"> </input><br> <br>
+  <input id="second" type="text" placeholder="enter your second num:"> </input><br> <br>
+  <!-- <input oninput="populatesum()" id="second" type="text" placeholder="enter your second num:"> </input><br> <br> -->
+  <button onclick="populatesum()">Sum</button> <br> <br>
+  <button onclick="populatesub()"> Sub</button> <br> <br>
+  <button onclick="populatemul()">Mul</button> <br> <br>
+  <button onclick="populatedivide()">Div</button> <br> <br>
+  <button onclick="populatemodulo()">Mod</button> <br> <br>
+  <div id="finalsum"></div>
+  </div>
+
+</body>
+
+</html>
